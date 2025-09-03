@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const session = require('express-session')
 const cookieSession = require('cookie-session');
+const userDB = require('../models/user.js');
 
 require('dotenv').config();
 
@@ -53,8 +54,6 @@ route.post('/register', async(req, res) => {
             password: hashedPassword
         });
 
-        res.status(200).json({message: 'Success'})
-
     }catch(e){
         console.error(e);
         res.status(500).json({message: 'Internal server error'});
@@ -68,6 +67,10 @@ route.post('/login', async(req, res) => {
     if (!email || !password) {
         console.log('Missing email or password');
         return res.json({errors: ['Email e senha são obrigatórios']});
+    }
+
+    if(password.length < 8){
+        return res.json({errors: ['Senha deve ter no mínimo 8 caracteres']});
     }
 
     const user = await users.findOne({where: {email}});
