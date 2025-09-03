@@ -48,13 +48,13 @@ route.post('/postComment', async(req, res)=>{
     }).then(res.status(201).json({success: true})).catch((e) => {console.log(e)});
 });
 
-route.delete('/deleteComment/:id', async(req, res) => {
+route.post('/deleteComment/:id', async(req, res) => {
     await location.destroy({where: {id: req.params.id}}).then(() => {
         res.json({success: true});
     }).catch((error) => {console.log(error)});
 });
 
-route.update('/solveComment/:id', async(req, res) => {
+route.post('/solveComment/:id', async(req, res) => {
     await location.update({solved: true}, {where: {id: req.params.id}}).then(() => {
         res.json({success: true});
     }).catch((error) => {console.log(error)});  
