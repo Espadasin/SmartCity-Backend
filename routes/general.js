@@ -22,7 +22,7 @@ route.use(cookieSession({
 }));
 
 //Routes
-route.get('/getFeedbacks', async (req, res)=>{
+route.get('/getComments', async (req, res)=>{
     await location.findAll().then((itens) => {
         res.json(itens);
     }).catch((error) => {console.log(error)});
@@ -34,7 +34,7 @@ route.get('/getUser/:id', async (req, res)=>{
     }).catch((error) => {console.log(error)});
 })
 
-route.post('/postFeedback', async(req, res)=>{
+route.post('/postComment', async(req, res)=>{
 
     if(!req.body.commentary){
         return res.json({errors: ['Faça um comentario.']});
@@ -45,9 +45,7 @@ route.post('/postFeedback', async(req, res)=>{
         latitude : req.body.latitude,
         longitude : req.body.longitude,
         type : req.body.type
-    });
-
-    res.status(201).json({success: true})
+    }).then(res.status(201).json({success: true})).catch((e) => {console.log(e)});
 });
 
 //
