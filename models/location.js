@@ -16,8 +16,11 @@ const location = db.sequelize.define('location', {
     type: {
         type: db.Sequelize.STRING,
         allowNull: false
+    },
+    solved: {
+        type: db.Sequelize.BOOLEAN,
+        defaultValue: false
     }
 });
-
 
 module.exports = location;

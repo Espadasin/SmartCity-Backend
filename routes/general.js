@@ -48,6 +48,16 @@ route.post('/postComment', async(req, res)=>{
     }).then(res.status(201).json({success: true})).catch((e) => {console.log(e)});
 });
 
-//
+route.delete('/deleteComment/:id', verifyAutentication, async(req, res) => {
+    await location.destroy({where: {id: req.params.id}}).then(() => {
+        res.json({success: true});
+    }).catch((error) => {console.log(error)});
+});
+
+route.put('/solveComment/:id', verifyAutentication, async(req, res) => {
+    await location.update({solved: true}, {where: {id: req.params.id}}).then(() => {
+        res.json({success: true});
+    }).catch((error) => {console.log(error)});  
+});
 
 module.exports = route;
