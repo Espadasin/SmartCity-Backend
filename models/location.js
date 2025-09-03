@@ -1,11 +1,6 @@
 const db = require('../config/db.js');
 
 const location = db.sequelize.define('location', {
-    id: {
-        type: db.Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
     commentary: {
         type: db.Sequelize.STRING,
         allowNull: false
@@ -17,7 +12,12 @@ const location = db.sequelize.define('location', {
     longitude: {
         type: db.Sequelize.FLOAT,
         allowNull: false
+    },
+    type: {
+        type: db.Sequelize.STRING,
+        allowNull: false
     }
 });
+
 
 module.exports = location;

@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const session = require('express-session')
 const cookieSession = require('cookie-session');
-const userDB = require('../models/user.js');
 
 require('dotenv').config();
 
@@ -53,6 +52,8 @@ route.post('/register', async(req, res) => {
             email: email,
             password: hashedPassword
         });
+
+        res.status(200).json({message: 'Success'})
 
     }catch(e){
         console.error(e);

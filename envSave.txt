@@ -1,0 +1,5 @@
+DB_URL=mysql://root:cKuTAtpZRPKxwSppiZYdUabczBWqRQOh@trolley.proxy.rlwy.net:13348/railway
+DB_USER=root
+DB_PASSWORD=cKuTAtpZRPKxwSppiZYdUabczBWqRQOh
+DB_HOST=mysql-production-1229.up.railway.app   
+DB_PORT=3306    
