@@ -39,6 +39,10 @@ route.post('/register', async(req, res) => {
         return res.json({errors: ['Nome é obrigatório']});
     }
 
+    if(password.length < 8){
+        return res.json({errors: ['Senha deve ter no mínimo 8 caracteres']});
+    }
+
     try{
         const verifyExistingUser = await users.findOne({where: {email}});
         if(verifyExistingUser){
@@ -67,10 +71,6 @@ route.post('/login', async(req, res) => {
     if (!email || !password) {
         console.log('Missing email or password');
         return res.json({errors: ['Email e senha são obrigatórios']});
-    }
-
-    if(password.length < 8){
-        return res.json({errors: ['Senha deve ter no mínimo 8 caracteres']});
     }
 
     const user = await users.findOne({where: {email}});
