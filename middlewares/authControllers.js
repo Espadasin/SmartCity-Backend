@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const userDB = require('../models/user.js');
 
 function verifyAutentication(req, res, next){
     const authToken = req.headers['x-access-token'];
@@ -13,7 +14,11 @@ function verifyAutentication(req, res, next){
         if (err) {
             return
         }
-        res.json(decode);
+        let user = userDB.findOne({where: {id: decode.user.id, email: decode.user.email}});
+        if(!user){
+            return
+        }
+        
         next();
     });
 };
